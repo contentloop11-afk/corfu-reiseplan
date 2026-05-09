@@ -14,8 +14,6 @@
         <a href="#route">Route</a>
         <a href="#locals">Spots</a>
         <a href="#stays">Apartments</a>
-        <a href="#bookings">Buchungen</a>
-        <a href="#notes">Notizen</a>
       </nav>
       <div class="hero__copy">
         <p class="eyebrow">16. bis 21. - Inselmodus</p>
@@ -107,9 +105,15 @@
           <p class="eyebrow">Reiseguide</p>
           <h2>Versteckte Ecken auf dem Weg</h2>
           <p class="lead">Klick auf eine Polaroid-Karte oder einen Pin auf der Map: Foto, GPS, Story, Notizfeld und Stempel. Was abgestempelt ist, bleibt gespeichert (lokal im Browser).</p>
-          <div class="visited-counter" aria-live="polite">
-            <span class="visited-counter__num"><span id="visitedCount">0</span> / <span id="visitedTotal">22</span></span>
-            <span class="visited-counter__label">Spots entdeckt</span>
+          <div class="counter-row">
+            <div class="visited-counter" aria-live="polite">
+              <span class="visited-counter__num"><span id="visitedCount">0</span> / <span id="visitedTotal">22</span></span>
+              <span class="visited-counter__label">Spots entdeckt</span>
+            </div>
+            <div class="kml-actions">
+              <button class="kml-btn" id="kmlDownload" type="button">KML herunterladen</button>
+              <a class="kml-btn kml-btn--ghost" id="kmlMapsOpen" href="#" target="_blank" rel="noopener">In Google My Maps oeffnen ↗</a>
+            </div>
           </div>
         </div>
         <div class="spot-layout">
@@ -125,54 +129,54 @@
 
       <section class="section stays" id="stays">
         <div class="section__head">
-          <p class="eyebrow">Unterkuenfte</p>
-          <h2>Foto-Spots wie auf der Karte</h2>
+          <p class="eyebrow">Unsere Unterkuenfte</p>
+          <h2>Vier Apartments, vier Ecken der Insel</h2>
+          <p class="lead">Pro Stop ein kleines Apartment. Was wir gebucht haben, was uns dort erwartet, und wo es genau liegt.</p>
         </div>
-        <div class="stay-grid">
-          <article class="stay-card" data-stop-card="0">
+        <div class="stay-grid stay-grid--detailed">
+          <article class="stay-card stay-card--detailed" data-stop-card="0">
             <img src="assets/antzela-apartments.jpg" alt="Antzela Apartments">
-            <div><h3>Antzela Apartments</h3><p>Sidari - Norden - nah an Sidari Beach und Canal d'Amour.</p></div>
+            <div class="stay-card__body">
+              <p class="eyebrow">Stop 1 - Norden</p>
+              <h3>Antzela Apartments</h3>
+              <p class="stay-card__where">Sidari - nah an Sidari Beach und Canal d'Amour</p>
+              <p class="stay-card__desc" data-tbd>tbd: was wir gebucht haben (Apartment-Groesse, Bett, Balkon, Kueche, Pool, ...)</p>
+              <p class="stay-card__nights"><strong>16. - 17.</strong> Mai 2026</p>
+            </div>
           </article>
-          <article class="stay-card" data-stop-card="1">
+          <article class="stay-card stay-card--detailed" data-stop-card="1">
             <img src="assets/akrogiali-apartments-lemnos.jpg" alt="Akrogiali Apartments">
-            <div><h3>Akrogiali Apartments</h3><p>Barbati/Pyrgi - Ostkueste - unterhalb Pantokrator, direkt in eurer Map markiert.</p></div>
+            <div class="stay-card__body">
+              <p class="eyebrow">Stop 2 - Ostkueste</p>
+              <h3>Akrogiali Apartments</h3>
+              <p class="stay-card__where">Barbati / Pyrgi - unterhalb Pantokrator, Ostkuesten-Mitte</p>
+              <p class="stay-card__desc" data-tbd>tbd: was wir gebucht haben (Apartment-Groesse, Bett, Balkon, Kueche, Pool, ...)</p>
+              <p class="stay-card__nights"><strong>17. - 18.</strong> Mai 2026</p>
+            </div>
           </article>
-          <article class="stay-card" data-stop-card="2">
+          <article class="stay-card stay-card--detailed" data-stop-card="2">
             <img src="assets/costas-apartments-mesongi.jpg" alt="Costas Apartments Mesongi">
-            <div><h3>Costas Apartments</h3><p>Mesongi - Suedostkueste - knapp hinter Messonghi Beach.</p></div>
+            <div class="stay-card__body">
+              <p class="eyebrow">Stop 3 - Suedost</p>
+              <h3>Costas Apartments</h3>
+              <p class="stay-card__where">Mesongi - knapp hinter Messonghi Beach</p>
+              <p class="stay-card__desc" data-tbd>tbd: was wir gebucht haben (Apartment-Groesse, Bett, Balkon, Kueche, Pool, ...)</p>
+              <p class="stay-card__nights"><strong>18. - 20.</strong> Mai 2026</p>
+            </div>
           </article>
-          <article class="stay-card" data-stop-card="3">
+          <article class="stay-card stay-card--detailed" data-stop-card="3">
             <img src="assets/kalypso-studios-kavos.jpg" alt="Kalypso Studios in Kavos">
-            <div><h3>Kalypso Studios</h3><p>Kavos - Suedspitze - nahe Arkoudilas Beach und Gardenos-Richtung.</p></div>
+            <div class="stay-card__body">
+              <p class="eyebrow">Stop 4 - Suedspitze</p>
+              <h3>Kalypso Studios</h3>
+              <p class="stay-card__where">Kavos - nahe Arkoudilas und Gardenos</p>
+              <p class="stay-card__desc" data-tbd>tbd: was wir gebucht haben (Apartment-Groesse, Bett, Balkon, Kueche, Pool, ...)</p>
+              <p class="stay-card__nights"><strong>20. - 21.</strong> Mai 2026</p>
+            </div>
           </article>
         </div>
       </section>
 
-      <section class="section bookings" id="bookings">
-        <div class="section__head">
-          <p class="eyebrow">Fixpunkte</p>
-          <h2>Flug, Auto, Koffer</h2>
-        </div>
-        <div class="booking-grid booking-grid--single">
-          <figure class="booking-collage">
-            <img src="assets/generated-booking-collage.png" alt="Stilisierte Flug und Fiat Buchung als Aquarell-Collage">
-            <figcaption>Flug und Fiat als Reisejournal statt Beleg-Screenshot. Die echten Buchungs-PDFs liegen lokal — nicht im Repo.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="section notes-section" id="notes">
-        <div class="section__head">
-          <p class="eyebrow">Unsere Sammlung</p>
-          <h2>Kleine Dinge, die wir nicht verlieren wollen</h2>
-        </div>
-        <div class="briefing">
-          <p>Ein Tag Norden: Sidari, Canal d'Amour, kleine Buchten, Sonnenuntergang suchen.</p>
-          <p>Ein Tag Suedosten: Mesongi, Wasser, Tavernen, langsam machen.</p>
-          <p>Ein Tag Sueden: Kavos als Ausgangspunkt, Arkoudilas Beach als rauerer Spot und danach mit dem Fiat zurueck.</p>
-          <p class="milo-note">Milo bekommt nach der Reise die volle Foto-Show und wahrscheinlich eine Ausrede, warum er nicht mitdurfte.</p>
-        </div>
-      </section>
     </main>
 
     <div class="modal" id="spotModal" role="dialog" aria-modal="true" aria-hidden="true">

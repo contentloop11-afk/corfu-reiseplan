@@ -45,7 +45,7 @@ const localSpots = [
     name: "Loggas Beach",
     area: "Peroulades",
     type: "Sunset",
-    image: "assets/generated-corfu-watercolor-hero.png",
+    image: "assets/spots/loggas-beach.jpg",
     note: "Steilkueste, Abendlicht, gut kombinierbar mit Cape Drastis.",
     story: "Der Sunset-Stop schlechthin im Norden. Steilkueste mit kleiner Bar oben, der Strand selbst ist nur per Treppe erreichbar — wer will, geht runter, ansonsten reicht das Abendlicht von oben.",
     coords: "39.787611, 19.666557",
@@ -55,7 +55,7 @@ const localSpots = [
     name: "Canal d'Amour",
     area: "Sidari",
     type: "Bucht",
-    image: "assets/antzela-apartments.jpg",
+    image: "assets/spots/canal-damour.jpg",
     note: "Direkt im Norden-Cluster, touristischer, aber fuer einen fruehen kurzen Stop sinnvoll.",
     story: "Sandstein-Felsen mit dem schmalen Kanal dazwischen — die Sage sagt, Paare die durchschwimmen, heiraten bald. Foto-Moment fuer uns. Frueh hin, dann ist es leerer.",
     coords: "39.797475, 19.698083",
@@ -85,7 +85,7 @@ const localSpots = [
     name: "Angelokastro",
     area: "Krini",
     type: "Burg-Ruine",
-    image: "assets/generated-corfu-scribble-map.png",
+    image: "assets/spots/angelokastro.jpg",
     note: "Byzantinische Burg, Blick ueber die Westkueste, guter Kulturstop zwischen Meerpausen.",
     story: "Festungsruine aus dem 13. Jh. auf 305m, von dort sah man frueher angeblich bis Otranto. Kurzer steiler Aufstieg vom Parkplatz in Krini, oben winzige Kapelle und 360-Grad-Blick. Schatten ist rar — Kappe.",
     coords: "39.678268, 19.686576",
@@ -105,7 +105,7 @@ const localSpots = [
     name: "Pantokrator",
     area: "Nordost",
     type: "Gipfel-Aussicht",
-    image: "assets/generated-corfu-scribble-map.png",
+    image: "assets/spots/pantokrator.jpg",
     note: "Hoechster Inselblick, kurvige Strecke, eher frueh oder spaeter fahren.",
     story: "Mit 906m der hoechste Berg der Insel, oben ein Kloster und ein TV-Mast. Strasse ist eng und kurvig, oben aber Blick ueber die ganze Insel und an klaren Tagen bis Albanien. Frueh raus oder spaet hin — Mittagshitze nicht empfehlenswert.",
     coords: "39.747749, 19.872246",
@@ -125,7 +125,7 @@ const localSpots = [
     name: "Nissaki Beach",
     area: "bei Barbati",
     type: "Bucht",
-    image: "assets/akrogiali-apartments-lemnos.jpg",
+    image: "assets/spots/nissaki.jpg",
     note: "Kleine Ostkuestenbucht in Akrogiali-Nahe, passt gut als kurzer Wasserstop.",
     story: "Kleine Kieselbucht mit klarem Wasser, Tavernen am Strand. Vom Akrogiali in 5 Minuten erreichbar. Gut fuer einen schnellen Sprung ins Wasser am Vormittag.",
     coords: "39.724018, 19.896985",
@@ -185,7 +185,7 @@ const localSpots = [
     name: "Korission Lagoon",
     area: "Suedwest",
     type: "Natur",
-    image: "assets/generated-corfu-watercolor-hero.png",
+    image: "assets/spots/korission-lagoon.jpg",
     note: "Lagune, Duenen, Voegel, flacher als die Klippen-Spots und schoen zum Streunen.",
     story: "Salzwasserlagune mit Duenen Richtung Meer. Voegel, Flamingos im Fruehjahr/Herbst, sonst eher Sumpfvogel-Romantik. Verbindbar mit Issos Beach — der Sandstrand liegt direkt an der Lagune.",
     coords: "39.445825, 19.910801",
@@ -205,7 +205,7 @@ const localSpots = [
     name: "Chlomos",
     area: "ueber Mesongi",
     type: "Bergdorf",
-    image: "assets/generated-booking-collage.png",
+    image: "assets/spots/chlomos.jpg",
     note: "Bergdorf ueber dem Suedosten, weniger Beach, mehr Blick und langsames Durchfahren.",
     story: "Eines der hoechstgelegenen Doerfer Korfus, kleine weisse Haeuser uebereinander gestapelt. Ein paar Tavernen, weniger Touristen. Der Blick auf Lefkimmi und die Lagune ist der Grund fuer den Umweg.",
     coords: "39.456684, 19.957776",
@@ -215,7 +215,7 @@ const localSpots = [
     name: "Boukari",
     area: "Suedostkueste",
     type: "Essen / Wasser",
-    image: "assets/generated-corfu-watercolor-hero.png",
+    image: "assets/spots/boukari.jpg",
     note: "Kleine Kuestenlinie fuer ruhigeres Essen am Wasser, sinnvoll von Costas aus.",
     story: "Kleines Fischerdorf direkt am Wasser, ein paar Tavernen mit Tischen quasi im Meer. Klassisches Sundowner-Mittagessen, wenn man von Costas aus losgeht.",
     coords: "39.459542, 19.977214",
@@ -225,7 +225,7 @@ const localSpots = [
     name: "Gardenos Beach",
     area: "Sueden",
     type: "Strand",
-    image: "assets/kalypso-studios-kavos.jpg",
+    image: "assets/spots/gardenos.jpg",
     note: "Laengerer, entspannter Strand westlich von Kavos, weniger Kavos-Trubel.",
     story: "Breiter, flach abfallender Sandstrand, ein paar Tavernen, kaum Hotels. Wer Kavos zu laut findet, bekommt hier 10 Minuten weiter den entspannten Gegenentwurf.",
     coords: "39.392931, 20.027148",
@@ -235,7 +235,7 @@ const localSpots = [
     name: "Arkoudilas Beach",
     area: "Kavos",
     type: "wilder Strand",
-    image: "assets/kalypso-studios-kavos.jpg",
+    image: "assets/spots/arkoudilas.jpg",
     note: "Rauer Suedspitzen-Spot, direkt passend zum Kalypso-Cluster.",
     story: "Der wildeste Strand der Suedspitze. Steiler Trampelpfad runter durch Wald, dann Sand und meist niemand da. Im Sommer schwierig wegen Sonne — Schatten gibt es nicht. Vom Kalypso aus mit Fiat 15 Minuten.",
     coords: "39.365841, 20.101741",
@@ -245,7 +245,7 @@ const localSpots = [
     name: "Alykes Lefkimmi",
     area: "Lefkimmi",
     type: "Salinen",
-    image: "assets/generated-corfu-scribble-map.png",
+    image: "assets/spots/alykes-lefkimmi.jpg",
     note: "Flache Salinen-/Naturzone, ruhigere Alternative wenn man schon im Sueden ist.",
     story: "Alte Salzgewinnungs-Felder, jetzt Naturschutzgebiet. Sehr flach, sehr still, viele Voegel. Nicht spektakulaer, aber schoen zum Streunen wenn man von Lefkimmi aus die Schleife nach Sueden macht.",
     coords: "39.437857, 20.059674",
@@ -415,6 +415,88 @@ function closeModal() {
 if (modal) {
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+}
+
+// ---------- KML Export ----------
+function escapeXml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+}
+function buildKml() {
+  const folders = {};
+  localSpots.forEach((s) => {
+    const day = s.day || "Sonstige";
+    folders[day] = folders[day] || [];
+    folders[day].push(s);
+  });
+  const stayMarkers = stops.map((stp, i) => ({
+    name: `Stop ${i+1}: ${stp.name}`,
+    place: stp.place,
+    coords: STAY_COORDS[i],
+    desc: stp.mood
+  })).filter(s => s.coords);
+
+  const placemark = (s, kind = "spot") => {
+    const [lat, lng] = s.coords.split(",").map(x => x.trim());
+    const desc = (s.story || s.note || s.desc || "").replace(/\s+/g, " ").trim();
+    const styleUrl = kind === "stay" ? "#stay" : "#spot";
+    return `    <Placemark>
+      <name>${escapeXml(s.name)}</name>
+      <description>${escapeXml(desc)}</description>
+      <styleUrl>${styleUrl}</styleUrl>
+      <Point><coordinates>${lng},${lat}</coordinates></Point>
+    </Placemark>`;
+  };
+
+  let kml = `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Korfu Reiseplan</name>
+  <description>22 Spots + 4 Apartments fuer unsere Korfu-Woche.</description>
+  <Style id="spot"><IconStyle><color>ff5161ef</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+  <Style id="stay"><IconStyle><color>ff8e7c27</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/lodging.png</href></Icon></IconStyle></Style>
+`;
+  if (stayMarkers.length) {
+    kml += `  <Folder><name>Apartments</name>\n`;
+    stayMarkers.forEach(s => { kml += placemark(s, "stay") + "\n"; });
+    kml += `  </Folder>\n`;
+  }
+  Object.keys(folders).forEach(day => {
+    kml += `  <Folder><name>${escapeXml(day)}</name>\n`;
+    folders[day].forEach(s => { kml += placemark(s, "spot") + "\n"; });
+    kml += `  </Folder>\n`;
+  });
+  kml += `</Document>
+</kml>`;
+  return kml;
+}
+
+const STAY_COORDS = [
+  "39.795000, 19.706800",  // Antzela / Sidari
+  "39.731000, 19.881700",  // Akrogiali / Barbati
+  "39.481200, 19.928900",  // Costas / Mesongi
+  "39.387200, 20.110100"   // Kalypso / Kavos
+];
+
+const kmlDownloadBtn = document.querySelector("#kmlDownload");
+const kmlMapsLink = document.querySelector("#kmlMapsOpen");
+if (kmlDownloadBtn) {
+  kmlDownloadBtn.addEventListener("click", () => {
+    const kml = buildKml();
+    const blob = new Blob([kml], { type: "application/vnd.google-earth.kml+xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "korfu-reiseplan.kml";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 100);
+  });
+}
+if (kmlMapsLink) {
+  kmlMapsLink.href = "https://www.google.com/maps/d/u/0/?action=open";
+  kmlMapsLink.title = "Erst KML herunterladen, dann in Google My Maps -> Neue Karte -> KML importieren";
 }
 
 // ---------- Misc ----------
