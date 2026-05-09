@@ -253,6 +253,59 @@ const localSpots = [
   }
 ];
 
+// ---------- Quests / Gamification ----------
+const QUEST_POINTS = { spot: 10, photo: 25, experience: 20 };
+
+const photoQuests = [
+  { id: "p1",  title: "Cape-Drastis-Klippen im grünen Atmo-Look",      hint: "Lange Belichtung, Cypress-Schatten, Klippen oben rechts." },
+  { id: "p2",  title: "Loggas-Sunset-Silhouette",                       hint: "Du oder Zoe als Schattenriss gegen die Abendsonne." },
+  { id: "p3",  title: "Selfie mit Saint-Spiridon-Glockenturm",           hint: "Tilt-Up, Glockenturm muss komplett rein." },
+  { id: "p4",  title: "Porto-Timoni von oben",                          hint: "Postkarten-Doppelbucht-Shot vom Hike." },
+  { id: "p5",  title: "Pantokrator-Panorama in 4K",                     hint: "180°-Schwenk Korfu → Albanien." },
+  { id: "p6",  title: "Foto im Olivenhain bei Old Perithia",             hint: "Knorrige Olivenstämme, Spotlight zwischen Blättern." },
+  { id: "p7",  title: "Vlaherna-Mole mit Flieger im Bild",               hint: "Timing: Anflug auf Korfu Town." },
+  { id: "p8",  title: "Boukari-Tisch direkt im Wasser",                  hint: "Glas, Teller, Meerblick — klassiker." },
+  { id: "p9",  title: "Canal-d'Amour-Sandstein-Detail",                  hint: "Macro auf die Sandstein-Texturen." },
+  { id: "p10", title: "Korission-Lagune mit Vogel-Bonus",                hint: "Reiher, Möwe, Flamingo — irgendwas mit Federn." }
+];
+
+const experienceQuests = [
+  { id: "e1", title: "Im Meer schwimmen",                          hint: "Mindestens 5 Minuten, kein Tauchgang im Pool zählt." },
+  { id: "e2", title: "Souvlaki essen wo nur Locals sitzen",        hint: "Kein Restaurant mit englischer Karte vor der Tür." },
+  { id: "e3", title: "Sonnenaufgang auf Pantokrator",              hint: "Frühaufstehen-Quest. Wert: ungeschlagen." },
+  { id: "e4", title: "Bootstour zu Porto Timoni",                  hint: "30 € pro Person, alternativ kleines Boot in Paleokastritsa." },
+  { id: "e5", title: "Olivenöl mitbringen",                        hint: "Direktverkauf vom Bauern, nicht Supermarkt." },
+  { id: "e6", title: "In Kassiopi an einer Taverne sitzen",        hint: "Pflicht: Frappé oder Mythos — eines davon." },
+  { id: "e7", title: "Frappé am Strand bestellen",                 hint: "Iced, mit oder ohne Zucker, Diskussion danach." },
+  { id: "e8", title: "Eine Nacht ohne Handy verbringen",            hint: "Stempel hier ist Vertrauenssache." }
+];
+
+const achievements = [
+  { id: "a1", title: "Norden komplett",        bonus: 75,  cond: ["Cape Drastis", "Loggas Beach", "Canal d'Amour"] },
+  { id: "a2", title: "Westen komplett",        bonus: 75,  cond: ["Porto Timoni", "Paleokastritsa Monastery", "Angelokastro"] },
+  { id: "a3", title: "Stadt komplett",         bonus: 75,  cond: ["Saint Spiridon Church", "Old Fortress", "Vlaherna & Pontikonisi", "Achilleion Palace"] },
+  { id: "a4", title: "Süden komplett",         bonus: 75,  cond: ["Gardiki Castle", "Korission Lagoon", "Issos Beach", "Boukari", "Gardenos Beach", "Arkoudilas Beach"] },
+  { id: "a5", title: "Vier-Regionen-Sweep",    bonus: 200, cond: "ALL_REGIONS" },
+  { id: "a6", title: "Insel-Master",           bonus: 250, cond: "ALL_SPOTS" }
+];
+
+const RANK_THRESHOLDS = [
+  { score: 0,    label: "Hello Korfu" },
+  { score: 100,  label: "Inselgast" },
+  { score: 250,  label: "Strand-Stammgast" },
+  { score: 450,  label: "Olivenöl-Kenner" },
+  { score: 700,  label: "Dorf-Verschwoerer" },
+  { score: 950,  label: "Korfu-Veteran" },
+  { score: 1100, label: "Insel-Master" }
+];
+
+function maxPossibleScore() {
+  return localSpots.length * QUEST_POINTS.spot
+    + photoQuests.length * QUEST_POINTS.photo
+    + experienceQuests.length * QUEST_POINTS.experience
+    + achievements.reduce((s, a) => s + a.bonus, 0);
+}
+
 const STORAGE_KEY = "corfu-guide-v1";
 
 function loadState() {
@@ -266,6 +319,8 @@ function saveState(state) {
 let state = loadState();
 state.visited = state.visited || {};
 state.notes = state.notes || {};
+state.quests = state.quests || {};
+state.achievements = state.achievements || {};
 
 const panel = document.querySelector("#stopPanel");
 const points = [...document.querySelectorAll(".photo-pin")];
@@ -395,11 +450,22 @@ function openModal(index) {
   const stampBtn = modalBody.querySelector(".modal__stamp");
   if (stampBtn) {
     stampBtn.addEventListener("click", () => {
-      const newVal = !state.visited[spot.name];
+      const wasVisited = !!state.visited[spot.name];
+      const newVal = !wasVisited;
       state.visited[spot.name] = newVal;
       saveState(state);
       updateCounter();
       renderSpotCards();
+      const delta = newVal ? QUEST_POINTS.spot : -QUEST_POINTS.spot;
+      refreshScore(delta);
+      if (newVal) {
+        fireConfetti();
+        setTimeout(checkAchievements, 200);
+      }
+      if (typeof renderQuests === "function") {
+        renderQuests();
+        updateTabBadges();
+      }
       openModal(index);
     });
   }
@@ -416,6 +482,244 @@ if (modal) {
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 }
+
+// ---------- Score & Animation ----------
+const scoreEl = document.querySelector("#scoreValue");
+const scoreBarFill = document.querySelector("#scoreBarFill");
+const scoreRankEl = document.querySelector("#scoreRank");
+const scorePill = document.querySelector("#scorePill");
+const scorePops = document.querySelector("#scorePops");
+let displayedScore = 0;
+let scoreAnimRaf = null;
+
+function computeScore() {
+  let total = 0;
+  Object.values(state.visited).forEach(v => { if (v) total += QUEST_POINTS.spot; });
+  Object.entries(state.quests).forEach(([id, done]) => {
+    if (!done) return;
+    if (id.startsWith("p")) total += QUEST_POINTS.photo;
+    else if (id.startsWith("e")) total += QUEST_POINTS.experience;
+  });
+  Object.entries(state.achievements).forEach(([id, done]) => {
+    if (!done) return;
+    const a = achievements.find(x => x.id === id);
+    if (a) total += a.bonus;
+  });
+  return total;
+}
+
+function rankFor(score) {
+  let r = RANK_THRESHOLDS[0];
+  for (const t of RANK_THRESHOLDS) if (score >= t.score) r = t;
+  return r;
+}
+
+function animateScoreTo(target) {
+  if (!scoreEl) return;
+  if (scoreAnimRaf) cancelAnimationFrame(scoreAnimRaf);
+  const start = displayedScore;
+  const startTime = performance.now();
+  const duration = Math.min(900, 250 + Math.abs(target - start) * 6);
+  const max = maxPossibleScore();
+  const step = (now) => {
+    const t = Math.min(1, (now - startTime) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const current = Math.round(start + (target - start) * eased);
+    displayedScore = current;
+    scoreEl.textContent = String(current);
+    if (scoreBarFill) scoreBarFill.style.width = (Math.min(100, (current / max) * 100)).toFixed(2) + "%";
+    if (scoreRankEl) scoreRankEl.textContent = rankFor(current).label;
+    if (t < 1) scoreAnimRaf = requestAnimationFrame(step);
+  };
+  scoreAnimRaf = requestAnimationFrame(step);
+}
+
+function popPoints(amount) {
+  if (!scorePops) return;
+  const pop = document.createElement("span");
+  pop.className = "score-pop";
+  pop.textContent = (amount > 0 ? "+" : "") + amount;
+  if (amount < 0) pop.classList.add("score-pop--neg");
+  scorePops.appendChild(pop);
+  if (scorePill) {
+    scorePill.classList.add("is-pulse");
+    setTimeout(() => scorePill.classList.remove("is-pulse"), 480);
+  }
+  setTimeout(() => pop.remove(), 1400);
+}
+
+function fireConfetti(big = false) {
+  if (typeof confetti !== "function") return;
+  if (big) {
+    confetti({ particleCount: 140, spread: 90, origin: { y: 0.3 }, scalar: 1.1, colors: ["#ef6f61","#277c8e","#7f8a4d","#fff0ba","#8fc8d4"] });
+    setTimeout(() => confetti({ particleCount: 80, angle: 60, spread: 55, origin: { x: 0, y: 0.4 } }), 180);
+    setTimeout(() => confetti({ particleCount: 80, angle: 120, spread: 55, origin: { x: 1, y: 0.4 } }), 320);
+  } else {
+    confetti({ particleCount: 35, spread: 55, origin: { y: 0.18, x: 0.92 }, scalar: .8, colors: ["#ef6f61","#277c8e","#fff0ba"] });
+  }
+}
+
+function showAchievementBanner(a) {
+  let banner = document.querySelector(".ach-banner");
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.className = "ach-banner";
+    document.body.appendChild(banner);
+  }
+  banner.innerHTML = `
+    <div class="ach-banner__inner">
+      <div class="ach-banner__eyebrow">Achievement freigeschaltet</div>
+      <div class="ach-banner__title">${a.title}</div>
+      <div class="ach-banner__bonus">+${a.bonus} Punkte</div>
+    </div>
+  `;
+  banner.classList.add("is-on");
+  setTimeout(() => banner.classList.remove("is-on"), 3200);
+}
+
+function checkAchievements() {
+  const visitedNames = new Set(Object.entries(state.visited).filter(([_, v]) => v).map(([k]) => k));
+  let unlockedNew = [];
+  achievements.forEach(a => {
+    if (state.achievements[a.id]) return;
+    let ok = false;
+    if (a.cond === "ALL_SPOTS") ok = visitedNames.size === localSpots.length;
+    else if (a.cond === "ALL_REGIONS") {
+      const regions = new Set();
+      visitedNames.forEach(n => {
+        const sp = localSpots.find(s => s.name === n);
+        if (sp) regions.add(sp.day);
+      });
+      ok = ["Norden","Westen","Nordost","Stadt","Sueden"].every(r => regions.has(r));
+    } else if (Array.isArray(a.cond)) {
+      ok = a.cond.every(name => visitedNames.has(name));
+    }
+    if (ok) {
+      state.achievements[a.id] = true;
+      unlockedNew.push(a);
+    }
+  });
+  if (unlockedNew.length) {
+    saveState(state);
+    unlockedNew.forEach((a, i) => {
+      setTimeout(() => {
+        showAchievementBanner(a);
+        fireConfetti(true);
+        popPoints(a.bonus);
+      }, i * 1200);
+    });
+  }
+}
+
+function refreshScore(delta) {
+  const newScore = computeScore();
+  animateScoreTo(newScore);
+  if (delta) popPoints(delta);
+}
+
+// ---------- Quest Rendering ----------
+const questGrid = document.querySelector("#questGrid");
+const questTabs = [...document.querySelectorAll(".quest-tab")];
+let currentTab = "photo";
+
+function questCardHtml(q, kind, points) {
+  const done = !!state.quests[q.id];
+  return `
+    <article class="quest-card${done ? " is-done" : ""}" data-quest-id="${q.id}" data-quest-kind="${kind}">
+      <span class="quest-card__points">+${points}</span>
+      <h3>${q.title}</h3>
+      <p>${q.hint}</p>
+      <button class="quest-card__btn" type="button">${done ? "✓ Erledigt" : "Abhaken"}</button>
+      <span class="quest-card__stamp" aria-hidden="true">Done</span>
+    </article>
+  `;
+}
+
+function achievementCardHtml(a) {
+  const done = !!state.achievements[a.id];
+  let progress = "";
+  if (Array.isArray(a.cond)) {
+    const have = a.cond.filter(n => state.visited[n]).length;
+    progress = `${have} / ${a.cond.length} Spots`;
+  } else if (a.cond === "ALL_SPOTS") {
+    const v = Object.values(state.visited).filter(Boolean).length;
+    progress = `${v} / ${localSpots.length} Spots`;
+  } else if (a.cond === "ALL_REGIONS") {
+    const regions = new Set();
+    Object.entries(state.visited).forEach(([n, v]) => {
+      if (!v) return;
+      const sp = localSpots.find(s => s.name === n);
+      if (sp) regions.add(sp.day);
+    });
+    progress = `${regions.size} / 5 Regionen`;
+  }
+  return `
+    <article class="quest-card quest-card--ach${done ? " is-done" : ""}" data-ach-id="${a.id}">
+      <span class="quest-card__points">+${a.bonus}</span>
+      <h3>🏆 ${a.title}</h3>
+      <p>${progress}</p>
+      <span class="quest-card__stamp quest-card__stamp--gold" aria-hidden="true">Unlocked</span>
+    </article>
+  `;
+}
+
+function renderQuests() {
+  if (!questGrid) return;
+  let html = "";
+  if (currentTab === "photo") {
+    html = photoQuests.map(q => questCardHtml(q, "photo", QUEST_POINTS.photo)).join("");
+  } else if (currentTab === "experience") {
+    html = experienceQuests.map(q => questCardHtml(q, "experience", QUEST_POINTS.experience)).join("");
+  } else if (currentTab === "achievement") {
+    html = achievements.map(a => achievementCardHtml(a)).join("");
+  }
+  questGrid.innerHTML = html;
+  questGrid.querySelectorAll("[data-quest-id]").forEach(card => {
+    card.addEventListener("click", (e) => {
+      const id = card.dataset.questId;
+      const kind = card.dataset.questKind;
+      const wasDone = !!state.quests[id];
+      state.quests[id] = !wasDone;
+      saveState(state);
+      const points = QUEST_POINTS[kind];
+      const delta = wasDone ? -points : points;
+      refreshScore(delta);
+      if (!wasDone) fireConfetti();
+      renderQuests();
+      updateTabBadges();
+    });
+  });
+}
+
+function updateTabBadges() {
+  questTabs.forEach(tab => {
+    const t = tab.dataset.tab;
+    const badge = tab.querySelector("span");
+    if (!badge) return;
+    if (t === "photo") {
+      const done = photoQuests.filter(q => state.quests[q.id]).length;
+      badge.textContent = `${done}/${photoQuests.length}`;
+    } else if (t === "experience") {
+      const done = experienceQuests.filter(q => state.quests[q.id]).length;
+      badge.textContent = `${done}/${experienceQuests.length}`;
+    } else if (t === "achievement") {
+      const done = achievements.filter(a => state.achievements[a.id]).length;
+      badge.textContent = `${done}/${achievements.length}`;
+    }
+  });
+}
+
+questTabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    questTabs.forEach(t => t.classList.toggle("is-on", t === tab));
+    currentTab = tab.dataset.tab;
+    renderQuests();
+  });
+});
+
+renderQuests();
+updateTabBadges();
+refreshScore(0);
 
 // ---------- KML Export ----------
 function escapeXml(s) {
