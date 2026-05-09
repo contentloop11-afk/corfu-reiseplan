@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Urlaubsplan: Inselroute</title>
+    <meta name="description" content="Interaktive Reiseplanung mit Route, Unterkuenften, Buchungen und Notizblatt-Look.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <img class="hero__image" src="assets/generated-corfu-watercolor-hero.png" alt="Aquarell-Illustration von Corfu mit Fiat und Reisetagebuch">
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="#route">Route</a>
+        <a href="#locals">Spots</a>
+        <a href="#stays">Apartments</a>
+        <a href="#bookings">Buchungen</a>
+        <a href="#notes">Notizen</a>
+      </nav>
+      <div class="hero__copy">
+        <p class="eyebrow">16. bis 21. - Inselmodus</p>
+        <h1>Corfu auf einen Blick</h1>
+        <p>Unsere Woche: Norden, Sueden, Strandpausen, Fiat und die Orte, die wir uns merken wollen.</p>
+      </div>
+      <button class="float-chip" id="miloToggle" type="button" aria-pressed="false">Milo bleibt zuhause</button>
+    </header>
+
+    <main>
+      <section class="travel-board" aria-label="Reiseuebersicht">
+        <article class="note note--wide note--personal">
+          <span class="pin"></span>
+          <h2>Unser Modus</h2>
+          <p>Fiat schnappen, ans Wasser, quer ueber die Insel und abends entscheiden: ruhig oder lebendig.</p>
+        </article>
+        <article class="note">
+          <span class="pin pin--coral"></span>
+          <strong>Fix</strong>
+          <p>Flug und Auto sind die Anker. Der Rest darf sich nach Wetter, Laune und Hunger bewegen.</p>
+        </article>
+        <article class="note note--blue">
+          <span class="pin pin--blue"></span>
+          <strong>Kleiner Stich</strong>
+          <p>Milo bleibt zuhause. Dafuer gibt es danach Extra-Aufmerksamkeit und wahrscheinlich zu viele Fotos.</p>
+        </article>
+      </section>
+
+      <section class="section route-section" id="route">
+        <div class="section__head">
+          <p class="eyebrow">Corfu Map</p>
+          <h2>Unsere echten Punkte</h2>
+        </div>
+        <div class="route-layout">
+          <div class="map-card corfu-card" aria-label="Klickbare Corfu Karte">
+            <img class="corfu-map" src="assets/generated-corfu-scribble-map.png" alt="Handgezeichnete Corfu Karte">
+            <button class="photo-pin is-active pin-antzela" data-stop="0" aria-label="Antzela Apartments in Sidari">
+              <img src="assets/antzela-apartments.jpg" alt="">
+              <span>Sidari</span>
+            </button>
+            <button class="photo-pin pin-akrogiali" data-stop="1" aria-label="Akrogiali Apartments bei Barbati">
+              <img src="assets/akrogiali-apartments-lemnos.jpg" alt="">
+              <span>Akrogiali</span>
+            </button>
+            <button class="photo-pin pin-costas" data-stop="2" aria-label="Costas Apartments in Mesongi">
+              <img src="assets/costas-apartments-mesongi.jpg" alt="">
+              <span>Mesongi</span>
+            </button>
+            <button class="photo-pin pin-kalypso" data-stop="3" aria-label="Kalypso Studios in Kavos">
+              <img src="assets/kalypso-studios-kavos.jpg" alt="">
+              <span>Kavos</span>
+            </button>
+            <button class="spot-marker spot-beach" data-spot="0" style="--x: 27%; --y: 14%;" aria-label="Cape Drastis"></button>
+            <button class="spot-marker spot-sunset" data-spot="1" style="--x: 25%; --y: 17%;" aria-label="Loggas Beach"></button>
+            <button class="spot-marker spot-beach" data-spot="2" style="--x: 35%; --y: 16%;" aria-label="Canal d'Amour"></button>
+            <button class="spot-marker spot-beach" data-spot="3" style="--x: 23%; --y: 34%;" aria-label="Porto Timoni"></button>
+            <button class="spot-marker spot-monastery" data-spot="4" style="--x: 28%; --y: 42%;" aria-label="Paleokastritsa Monastery"></button>
+            <button class="spot-marker spot-ruin" data-spot="5" style="--x: 31%; --y: 43%;" aria-label="Angelokastro"></button>
+            <button class="spot-marker spot-village" data-spot="6" style="--x: 61%; --y: 19%;" aria-label="Old Perithia"></button>
+            <button class="spot-marker spot-view" data-spot="7" style="--x: 59%; --y: 31%;" aria-label="Pantokrator"></button>
+            <button class="spot-marker spot-village" data-spot="8" style="--x: 71%; --y: 18%;" aria-label="Kassiopi"></button>
+            <button class="spot-marker spot-beach" data-spot="9" style="--x: 68%; --y: 39%;" aria-label="Nissaki Beach"></button>
+            <button class="spot-marker spot-church" data-spot="10" style="--x: 65%; --y: 53%;" aria-label="Saint Spiridon Church"></button>
+            <button class="spot-marker spot-fortress" data-spot="11" style="--x: 67%; --y: 54%;" aria-label="Old Fortress"></button>
+            <button class="spot-marker spot-monastery" data-spot="12" style="--x: 64%; --y: 57%;" aria-label="Vlaherna &amp; Pontikonisi"></button>
+            <button class="spot-marker spot-palace" data-spot="13" style="--x: 61%; --y: 62%;" aria-label="Achilleion Palace"></button>
+            <button class="spot-marker spot-ruin" data-spot="14" style="--x: 52%; --y: 70%;" aria-label="Gardiki Castle"></button>
+            <button class="spot-marker spot-nature" data-spot="15" style="--x: 48%; --y: 78%;" aria-label="Korission Lagoon"></button>
+            <button class="spot-marker spot-beach" data-spot="16" style="--x: 51%; --y: 82%;" aria-label="Issos Beach"></button>
+            <button class="spot-marker spot-village" data-spot="17" style="--x: 66%; --y: 72%;" aria-label="Chlomos"></button>
+            <button class="spot-marker spot-food" data-spot="18" style="--x: 72%; --y: 75%;" aria-label="Boukari"></button>
+            <button class="spot-marker spot-beach" data-spot="19" style="--x: 75%; --y: 86%;" aria-label="Gardenos Beach"></button>
+            <button class="spot-marker spot-beach" data-spot="20" style="--x: 76%; --y: 95%;" aria-label="Arkoudilas Beach"></button>
+            <button class="spot-marker spot-nature" data-spot="21" style="--x: 78%; --y: 83%;" aria-label="Alykes Lefkimmi"></button>
+            <div class="map-scribble">Pins nach euren Maps gesetzt</div>
+          </div>
+          <aside class="stop-panel" id="stopPanel">
+            <img src="assets/antzela-apartments.jpg" alt="Antzela Apartments">
+            <p class="eyebrow">Stop 1</p>
+            <h3>Antzela Apartments</h3>
+            <p class="place">Sidari, Norden - nahe Canal d'Amour</p>
+            <p class="mood">Der noerdliche Punkt: Sandstein-Klippen, Canal-d'Amour-Gegend, erster Kaffee und ein guter Start fuer kleine Buchten.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section local-spots" id="locals">
+        <div class="section__head">
+          <p class="eyebrow">Reiseguide</p>
+          <h2>Versteckte Ecken auf dem Weg</h2>
+          <p class="lead">Klick auf eine Polaroid-Karte oder einen Pin auf der Map: Foto, GPS, Story, Notizfeld und Stempel. Was abgestempelt ist, bleibt gespeichert (lokal im Browser).</p>
+          <div class="visited-counter" aria-live="polite">
+            <span class="visited-counter__num"><span id="visitedCount">0</span> / <span id="visitedTotal">22</span></span>
+            <span class="visited-counter__label">Spots entdeckt</span>
+          </div>
+        </div>
+        <div class="spot-layout">
+          <article class="spotlight" id="spotlight">
+            <p class="eyebrow">Norden</p>
+            <h3>Cape Drastis</h3>
+            <p>Weisse Klippen, wilder Blick, besser laufen als den letzten Dirt-Track mit dem Auto erzwingen.</p>
+            <span>Strand / Aussicht</span>
+          </article>
+          <div class="spot-grid" id="spotGrid"></div>
+        </div>
+      </section>
+
+      <section class="section stays" id="stays">
+        <div class="section__head">
+          <p class="eyebrow">Unterkuenfte</p>
+          <h2>Foto-Spots wie auf der Karte</h2>
+        </div>
+        <div class="stay-grid">
+          <article class="stay-card" data-stop-card="0">
+            <img src="assets/antzela-apartments.jpg" alt="Antzela Apartments">
+            <div><h3>Antzela Apartments</h3><p>Sidari - Norden - nah an Sidari Beach und Canal d'Amour.</p></div>
+          </article>
+          <article class="stay-card" data-stop-card="1">
+            <img src="assets/akrogiali-apartments-lemnos.jpg" alt="Akrogiali Apartments">
+            <div><h3>Akrogiali Apartments</h3><p>Barbati/Pyrgi - Ostkueste - unterhalb Pantokrator, direkt in eurer Map markiert.</p></div>
+          </article>
+          <article class="stay-card" data-stop-card="2">
+            <img src="assets/costas-apartments-mesongi.jpg" alt="Costas Apartments Mesongi">
+            <div><h3>Costas Apartments</h3><p>Mesongi - Suedostkueste - knapp hinter Messonghi Beach.</p></div>
+          </article>
+          <article class="stay-card" data-stop-card="3">
+            <img src="assets/kalypso-studios-kavos.jpg" alt="Kalypso Studios in Kavos">
+            <div><h3>Kalypso Studios</h3><p>Kavos - Suedspitze - nahe Arkoudilas Beach und Gardenos-Richtung.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section bookings" id="bookings">
+        <div class="section__head">
+          <p class="eyebrow">Fixpunkte</p>
+          <h2>Flug, Auto, Koffer</h2>
+        </div>
+        <div class="booking-grid booking-grid--single">
+          <figure class="booking-collage">
+            <img src="assets/generated-booking-collage.png" alt="Stilisierte Flug und Fiat Buchung als Aquarell-Collage">
+            <figcaption>Flug und Fiat als Reisejournal statt Beleg-Screenshot. Die echten Buchungs-PDFs liegen lokal — nicht im Repo.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section notes-section" id="notes">
+        <div class="section__head">
+          <p class="eyebrow">Unsere Sammlung</p>
+          <h2>Kleine Dinge, die wir nicht verlieren wollen</h2>
+        </div>
+        <div class="briefing">
+          <p>Ein Tag Norden: Sidari, Canal d'Amour, kleine Buchten, Sonnenuntergang suchen.</p>
+          <p>Ein Tag Suedosten: Mesongi, Wasser, Tavernen, langsam machen.</p>
+          <p>Ein Tag Sueden: Kavos als Ausgangspunkt, Arkoudilas Beach als rauerer Spot und danach mit dem Fiat zurueck.</p>
+          <p class="milo-note">Milo bekommt nach der Reise die volle Foto-Show und wahrscheinlich eine Ausrede, warum er nicht mitdurfte.</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="spotModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal__card" id="spotModalBody"></div>
+    </div>
+
+    <footer>
+      <a href="#top">Zurueck nach oben</a>
+      <span>Assets lokal im Projekt - generiertes Hero mit ChatGPT Image 2.0</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
